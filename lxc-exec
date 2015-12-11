@@ -4,7 +4,7 @@ if [[ $1 =~ ^[0-9]*$ ]]; then
   if [ -d /sys/fs/cgroup/cpu/lxc/$1 ]; then
     CONTAINER=$1
     COMMAND=$2
-    shift
+    shift 2
     ARGS=$@
     echo -ne "\e[1;32mprocessing container #${CONTAINER}\e[0m\n"
     pct exec $CONTAINER $COMMAND -- $ARGS
