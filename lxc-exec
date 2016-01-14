@@ -6,7 +6,7 @@ if [[ $1 =~ ^[0-9]*$ ]]; then
     COMMAND=$2
     shift 2
     ARGS=$@
-    echo -ne "\e[1;32mprocessing container #${CONTAINER} ($(grep hostname /etc/pve/lxc/${CONTAINER}.conf | awk '{print $NF}'))\e[0m\n"
+    echo -ne "\e[1;32mprocessing container #${CONTAINER} ($(grep -m 1 hostname /etc/pve/lxc/${CONTAINER}.conf | awk '{print $NF}'))\e[0m\n"
     pct exec $CONTAINER $COMMAND -- $ARGS
   else
     echo -ne "\e[1;31mcontainer $1 is not running\e[0m\n"
