@@ -15,7 +15,7 @@ lxc-exec 1337 apt-get install vim -y
 
 ## lxc-exec-all
 
-Execute a command inside all running containers using ```lxc-exe```.
+Execute a command inside all running containers using ```lxc-exec```.
 
 **Example**
 
@@ -23,3 +23,12 @@ Execute a command inside all running containers using ```lxc-exe```.
 lxc-exec-all 1337 apt-get update
 lxc-exec-all 1337 apt-get install vim -y
 ```
+
+## lxc-update-all
+
+Update software on all running containers using ```lxc-exec```).
+
+### Supported systems
+
+* apt-get
+* yum
