@@ -26,7 +26,7 @@ lxc-exec-all 1337 apt-get install vim -y
 
 ## lxc-update-all
 
-Update software on all running containers using ```lxc-exec```).
+Update software on all running containers using ```lxc-exec```.
 
 ### Supported systems
 
