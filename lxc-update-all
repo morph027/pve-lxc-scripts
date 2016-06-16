@@ -16,5 +16,5 @@ lxc-exec $CONTAINER yum -y update
 for CONTAINER in ${CONTAINERS[@]}
 do
   lxc-exec $CONTAINER which apt-get >/dev/null && apt_update
-  lxc-exec $CONTAINER which apt-get >/dev/null && yum_update
+  lxc-exec $CONTAINER which yum >/dev/null && yum_update
 done
