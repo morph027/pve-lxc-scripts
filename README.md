@@ -20,8 +20,8 @@ Execute a command inside all running containers using ```lxc-exec```.
 **Example**
 
 ```
-lxc-exec-all 1337 apt-get update
-lxc-exec-all 1337 apt-get install vim -y
+lxc-exec-all apt-get update
+lxc-exec-all apt-get install vim -y
 ```
 
 ## lxc-update-all
