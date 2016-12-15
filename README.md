@@ -8,7 +8,7 @@ Execute a command inside a running container.
 
 **Example**
 
-```
+```bash
 lxc-exec 1337 apt-get update
 lxc-exec 1337 apt-get install vim -y
 ```
@@ -19,7 +19,7 @@ Execute a command inside all running containers using ```lxc-exec```.
 
 **Example**
 
-```
+```bash
 lxc-exec-all apt-get update
 lxc-exec-all apt-get install vim -y
 ```

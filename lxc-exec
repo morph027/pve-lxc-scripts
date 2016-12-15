@@ -3,11 +3,10 @@
 if [[ $1 =~ ^[0-9]*$ ]]; then
   if [ -d /sys/fs/cgroup/cpu/lxc/$1 ]; then
     CONTAINER=$1
-    COMMAND=$2
-    shift 2
-    ARGS=$@
+    shift
+    COMMAND=$@
     echo -ne "\e[1;32mexecuting \"$COMMAND $ARGS\" container #${CONTAINER} ($(grep -m 1 hostname /etc/pve/lxc/${CONTAINER}.conf | awk '{print $NF}'))\e[0m\n"
-    pct exec $CONTAINER $COMMAND -- $ARGS
+    pct exec $CONTAINER /bin/sh -- -c "$COMMAND $ARGS"
   else
     echo -ne "\e[1;31mcontainer $1 is not running\e[0m\n"
     exit 1
