@@ -1,8 +1,7 @@
 #!/bin/bash
 
-CONTAINERS=( $(pct list | grep running | awk '{print $1}') )
+mapfile -t containers < <(pct list | grep running | awk '{print $1}')
 
-for CONTAINER in ${CONTAINERS[@]}
-do
-  lxc-exec $CONTAINER "$@"
+for container in "${containers[@]}"; do
+	lxc-exec "${container}" "$@"
 done

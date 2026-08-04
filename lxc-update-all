@@ -1,25 +1,24 @@
 #!/bin/bash
 
-CONTAINERS=( $(pct list | grep running | awk '{print $1}') )
+mapfile -t containers < <(pct list | grep running | awk '{print $1}')
 
 apt_update() {
-pct exec $CONTAINER "apt-get update"
-pct exec $CONTAINER "apt-get dist-upgrade -y"
-pct exec $CONTAINER "apt-get clean"
-pct exec $CONTAINER "apt-get autoremove -y"
+	lxc-exec "${container}" "apt-get update"
+	lxc-exec "${container}" "env DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::='--force-confold' dist-upgrade -y"
+	lxc-exec "${container}" "apt-get clean"
+	lxc-exec "${container}" "apt-get autoremove -y"
 }
 
 yum_update() {
-pct exec $CONTAINER "yum -y update"
+	lxc-exec "${container}" "yum -y update"
 }
 
 apk_update() {
-pct exec $CONTAINER "apk upgrade"
+	lxc-exec "${container}" "apk upgrade"
 }
 
-for CONTAINER in ${CONTAINERS[@]}
-do
-  pct exec $CONTAINER "which apt-get >/dev/null" && apt_update
-  pct exec $CONTAINER "which yum >/dev/null" && yum_update
-  pct exec $CONTAINER "which apk >/dev/null" && apk_update
+for container in "${containers[@]}"; do
+	lxc-exec "${container}" "which apt-get >/dev/null" && apt_update
+	lxc-exec "${container}" "which yum >/dev/null" && yum_update
+	lxc-exec "${container}" "which apk >/dev/null" && apk_update
 done
